@@ -1,17 +1,14 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Creating a map variable
-    var map_init = L.map('map',{
+    var map = L.map('map',{
         center: [9.0820, 8.6753],
         zoom:2
     });
 
     // Adding open street map layer
-    var osm = L.tileLayer ('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    var osm = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo (map_init);
-
-    // Adding markers
-    // var marker = L.marker([9.0820, 8.6753]).addTo(map_init);
+    }).addTo(map);
 
     var spaceObject = L.icon({
         iconUrl: 'images/hexagon-fill.svg'
@@ -22,8 +19,12 @@ document.addEventListener('DOMContentLoaded', function() {
     .then(response => response.json())
     .then(data => {
         console.log(data["geodetic"]);
+        console.log(data["tle"]["name"])
         latitude = data["geodetic"]["latitude"]
         longitude = data["geodetic"]["longitude"]
-        L.marker([latitude, longitude], {icon: spaceObject}).addTo(map_init)
+        label = data["tle"]["name"]
+
+        // Adding marker
+        L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map)
     })
 })
