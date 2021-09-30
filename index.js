@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function() {
         iconUrl: 'images/hexagon-fill.svg'
     });
 
-    fetchSatellites()
+    fetchPopularSatellites()
     .then(satellites => {
         for (var i = 0; i < satellites["member"].length; i++) {
             fetchPosition(satellites["member"][i]["satelliteId"])
@@ -36,9 +36,9 @@ document.addEventListener('DOMContentLoaded', function() {
     })
 })
 
-async function fetchSatellites() {
-    // Send a GET request to get all TLE objects. API has maz page-size=100, therefore hard-coding the value
-    const response = await fetch('https://tle.ivanstanojevic.me/api/tle/?page-size=100');
+async function fetchPopularSatellites() {
+    // Send a GET request to get all TLE objects. Sorting space objects as per popularity
+    const response = await fetch('https://tle.ivanstanojevic.me/api/tle/?sort=popularity');
     const satellites = await response.json();
     return satellites;
 }
