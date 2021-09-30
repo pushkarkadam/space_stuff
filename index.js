@@ -17,31 +17,27 @@ document.addEventListener('DOMContentLoaded', function() {
     // Send a GET request to get all TLE objects. API has maz page-size=100, therefore hard-coding the value
     fetch('https://tle.ivanstanojevic.me/api/tle/?page-size=100').
     then(response => response.json())
-    .then(data => {
+    .then(satelliteData => {
         // Array of all the satelliteId from the API call.
         var satelliteIds = [];
 
-
-        for (var i = 0; i < data["member"].length; i++) {
-            satelliteIds.push(data["member"][i]["satelliteId"]);
+        for (var i = 0; i < satelliteData["member"].length; i++) {
+            satelliteIds.push(satelliteData["member"][i]["satelliteId"]);
         }
 
-        console.log(satelliteIds);
+        for (var i = 0; i < satelliteData["member"].length; i++) {
+            // Send a GET request to the URL
+            fetch(`https://tle.ivanstanojevic.me/api/tle/${satelliteIds[i]}/propagate`)
+            .then(response => response.json())
+            .then(data => {
 
-        // Send a GET request to the URL
-        fetch('https://tle.ivanstanojevic.me/api/tle/25544/propagate')
-        .then(response => response.json())
-        .then(data => {
-            console.log(data["geodetic"]);
-            console.log(data["tle"]["name"])
-            latitude = data["geodetic"]["latitude"]
-            longitude = data["geodetic"]["longitude"]
-            label = data["tle"]["name"]
+                latitude = data["geodetic"]["latitude"];
+                longitude = data["geodetic"]["longitude"];
+                label = data["tle"]["name"];
 
-            // Adding marker
-            L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map)
-        })
+                // Adding marker
+                L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
+            })
+        }
     })
-
-
 })
