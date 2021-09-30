@@ -20,8 +20,21 @@
         </nav>
 
         <div class="container">
-            <h1 align="center">Track Space Objects</h1>
+            <div class="">
+                <h1 align="center">Track Space Objects</h1>
+            </div>
             <div class="row">
+
+                <form action="index.html" method="post" onsubmit="getSatellite()">
+                    <div class="form-group">
+                        <label>Object Name:</label>
+                        <input type="text" class="form-control" name="satellite" value="">
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-1 mb-1">Submit</button>
+                </form>
+            </div>
+
+            <div class="row mt-1">
                 <div class="" id="map">
 
                 </div>
