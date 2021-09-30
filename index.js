@@ -14,19 +14,21 @@ document.addEventListener('DOMContentLoaded', function() {
         iconUrl: 'images/hexagon-fill.svg'
     });
 
-    // var satelliteIds = [];
-
+    // Submitting the form to get all the space objects on the map
     document.querySelector('form').onsubmit = function() {
         const name = document.querySelector('#satellite').value;
         console.log(name);
+
+        // Get all the satellites with matching name from the form.
         fetchSatellite(name)
         .then(satellites => {
+            // Marks the initial position of the objects on the map
             for (var i = 0; i < satellites["member"].length; i++) {
                 fetchPosition(satellites["member"][i]["satelliteId"])
                 .then(position => {
-                    latitude = position["geodetic"]["latitude"];
-                    longitude = position["geodetic"]["longitude"];
-                    label = position["tle"]["name"];
+                    var latitude = position["geodetic"]["latitude"];
+                    var longitude = position["geodetic"]["longitude"];
+                    var label = position["tle"]["name"];
                     console.log(`Latitude: ${latitude}, Longitude: ${longitude}`)
 
                     // Adding marker
@@ -36,10 +38,32 @@ document.addEventListener('DOMContentLoaded', function() {
                     console.log(err.message);
                 })
             }
+            // Runs the following program for 30 seconds
+            setInterval(function() {
+                // Again iterate over all the objects to tract its current position
+                for (var i = 0; i < satellites["member"].length; i++) {
+                    fetchPosition(satellites["member"][i]["satelliteId"])
+                    .then(position => {
+                        var latitude = position["geodetic"]["latitude"];
+                        var longitude = position["geodetic"]["longitude"];
+                        var label = position["tle"]["name"];
+                        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`)
+
+                        // Adding marker
+                        L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
+                    })
+                    .catch(err => {
+                        console.log(err.message);
+                    })
+                }
+            }, 30000)
+
         })
         .catch(err => {
             console.log(err.message);
         })
+
+        // Prevent default submission
         return false;
     };
 })
