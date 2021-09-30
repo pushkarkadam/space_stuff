@@ -14,30 +14,38 @@ document.addEventListener('DOMContentLoaded', function() {
         iconUrl: 'images/hexagon-fill.svg'
     });
 
-    // Send a GET request to get all TLE objects. API has maz page-size=100, therefore hard-coding the value
-    fetch('https://tle.ivanstanojevic.me/api/tle/?page-size=100').
-    then(response => response.json())
-    .then(satelliteData => {
-        // Array of all the satelliteId from the API call.
-        var satelliteIds = [];
-
-        for (var i = 0; i < satelliteData["member"].length; i++) {
-            satelliteIds.push(satelliteData["member"][i]["satelliteId"]);
-        }
-
-        for (var i = 0; i < satelliteData["member"].length; i++) {
-            // Send a GET request to the URL
-            fetch(`https://tle.ivanstanojevic.me/api/tle/${satelliteIds[i]}/propagate`)
-            .then(response => response.json())
-            .then(data => {
-
-                latitude = data["geodetic"]["latitude"];
-                longitude = data["geodetic"]["longitude"];
-                label = data["tle"]["name"];
+    fetchSatellites()
+    .then(satellites => {
+        for (var i = 0; i < satellites["member"].length; i++) {
+            fetchPosition(satellites["member"][i]["satelliteId"])
+            .then(position => {
+                latitude = position["geodetic"]["latitude"];
+                longitude = position["geodetic"]["longitude"];
+                label = position["tle"]["name"];
 
                 // Adding marker
                 L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
             })
+            .catch(err => {
+                console.log(err.message);
+            })
         }
     })
+    .catch(err => {
+        console.log(err.message);
+    })
 })
+
+async function fetchSatellites() {
+    // Send a GET request to get all TLE objects. API has maz page-size=100, therefore hard-coding the value
+    const response = await fetch('https://tle.ivanstanojevic.me/api/tle/?page-size=100');
+    const satellites = await response.json();
+    return satellites;
+}
+
+async function fetchPosition(satelliteId) {
+    // Send a GET request to the URL
+    const response = await fetch(`https://tle.ivanstanojevic.me/api/tle/${satelliteId}/propagate`);
+    const position = await response.json();
+    return position;
+}
