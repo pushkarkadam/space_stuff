@@ -14,38 +14,45 @@ document.addEventListener('DOMContentLoaded', function() {
         iconUrl: 'images/hexagon-fill.svg'
     });
 
-    fetchPopularSatellites()
-    .then(satellites => {
-        for (var i = 0; i < satellites["member"].length; i++) {
-            fetchPosition(satellites["member"][i]["satelliteId"])
-            .then(position => {
-                latitude = position["geodetic"]["latitude"];
-                longitude = position["geodetic"]["longitude"];
-                label = position["tle"]["name"];
+    // var satelliteIds = [];
 
-                // Adding marker
-                L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
-            })
-            .catch(err => {
-                console.log(err.message);
-            })
-        }
-    })
-    .catch(err => {
-        console.log(err.message);
-    })
+    document.querySelector('form').onsubmit = function() {
+        const name = document.querySelector('#satellite').value;
+        console.log(name);
+        fetchSatellite(name)
+        .then(satellites => {
+            for (var i = 0; i < satellites["member"].length; i++) {
+                fetchPosition(satellites["member"][i]["satelliteId"])
+                .then(position => {
+                    latitude = position["geodetic"]["latitude"];
+                    longitude = position["geodetic"]["longitude"];
+                    label = position["tle"]["name"];
+                    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`)
+
+                    // Adding marker
+                    L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
+                })
+                .catch(err => {
+                    console.log(err.message);
+                })
+            }
+        })
+        .catch(err => {
+            console.log(err.message);
+        })
+        return false;
+    };
 })
-
-async function fetchPopularSatellites() {
-    // Send a GET request to get all TLE objects. Sorting space objects as per popularity
-    const response = await fetch('https://tle.ivanstanojevic.me/api/tle/?sort=popularity');
-    const satellites = await response.json();
-    return satellites;
-}
 
 async function fetchPosition(satelliteId) {
     // Send a GET request to the URL
     const response = await fetch(`https://tle.ivanstanojevic.me/api/tle/${satelliteId}/propagate`);
     const position = await response.json();
     return position;
+}
+
+async function fetchSatellite(name) {
+    const response = await fetch(`https://tle.ivanstanojevic.me/api/tle/?search=${name}`);
+    const satellites = await response.json();
+    return satellites;
 }
