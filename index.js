@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }).addTo(map);
 
     var spaceObject = L.icon({
-        iconUrl: 'images/hexagon-fill.svg'
+        iconUrl: 'images/hexagon-fill.svg',
         iconSize: [8, 8]
     });
 
