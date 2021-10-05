@@ -1,16 +1,9 @@
 # Stuff in Space
 
-This is a project that tracks all the known objects in space.
+The team Moon Kids prepared the project **Stuff in Space** as participation in NASA Space Apps Challenge 2021 held on 2-3 October 2021.
+This project is a web application where the user can track all the space objects (stuff) in real-time with time intervals of 30 seconds.
 
-Start by typing the space object (stuff) that interests you.
-You will be able to track objects in real time.
-The may will update the position every 30 seconds.
-
-This app runs by making API calls and there is a limit to the API call.
-So, please do not keep it running or search lot of things at a time.
-You may have to wait for an hour before you get time to track.
-
-# Running the app
+## Running the app
 
 * Clone the repository by `git clone <repository>` where you can copy the repository link from GitHub or download the source files.
 
@@ -20,9 +13,9 @@ You may have to wait for an hour before you get time to track.
 
 * Clear the map by pressing `Clear Map` button on the home page.
 
-![space stuff](images/spacestuff_title.png)
+![space stuff](images/map_tut.png)
 
-# Acknowledgements
+## Acknowledgements
 
 * [TLE API](https://tle.ivanstanojevic.me/)
 
