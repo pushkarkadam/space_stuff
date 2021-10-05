@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     var spaceObject = L.icon({
         iconUrl: 'images/hexagon-fill.svg',
-        iconSize: [8, 8]
+        iconSize: [14, 14]
     });
 
     // Submitting the form to get all the space objects on the map
