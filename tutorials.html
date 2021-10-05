@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+        <meta charset="utf-8">
+        <title>Tutorials</title>
+        <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+        <link rel="stylesheet" href="styles.css">
+        <!-- CSS only -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <!-- JavaScript Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+        <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <a class="navbar-brand" href="index.html">Stuff in Space</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="tutorials.html">Tutorials</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="about.html">About Us</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container">
+            <div class="">
+                <div class="">
+                    <h1>Tutorials</h1>
+                    <p>In this tutorial we explain how to use this web application.</p>
+                </div>
+                <hr>
+                <div class="">
+                    <h2><i class="bi bi-segmented-nav"></i> Navigation</h2>
+                    <p>
+                        The navigation bar helps you to navigate through different parts of this application.
+                        It is located on top of this web application.
+                    </p>
+                    <div class="border">
+                        <div class="m-3">
+                            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                                <a class="navbar-brand">Stuff in Space</a>
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarInText" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
+                                <div class="collapse navbar-collapse" id="navbarInText">
+                                    <ul class="navbar-nav mr-auto">
+                                        <li class="nav-item active">
+                                            <a class="nav-link">Home</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link">Tutorials</a>
+                                        </li>
+                                        <li class="nav-item active">
+                                            <a class="nav-link">About Us</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                    </div>
+                    <p>
+                        <h6>Navigation buttons</h6>
+                        <ul>
+                            <li>Home: Takes you to the home page of this application.</li>
+                            <li>Tutorials: Takes you to the tutorials on how to use the application.</li>
+                            <li>About Us: Takes you to the page about the team.</li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="">
+                    <h2><i class="bi bi-search"></i> Search</h2>
+                    <p>
+                        Search bar enables you to search for all the known objects in space.
+                        Make sure that you type specific names in the search bar.
+                        <strong>Example</strong>: To search for known space debris type <code>DEB</code> in the search bar.
+                    </p>
+                    <p>
+                        Any satellite or space object that has the suffix <code>DEB</code> is categorised as known debris for that satellite.
+                        <strong>Example</strong>: <code>COSMOS 2251 DEB</code> is a space debris.
+                    </p>
+                    <div class="border">
+                        <div class="m-3">
+                            <form>
+                                <div class="form-group">
+                                    <label>Object Name:</label>
+                                    <input type="text" class="form-control" placeholder="Enter the name of the space object you want to track. Example: ISS (ZARYA)">
+                                </div>
+                                <input type="submit" class="btn btn-primary disabled mt-1 mb-1">
+                            </form>
+                        </div>
+                    </div>
+                    <p>
+                        <h6>Popular searches</h6>
+                        <ul>
+                            <li><code>ISS (ZARYA)</code></li>
+                            <li><code>SAUDISAT</code></li>
+                            <li><code>SWISSCUBE</code></li>
+                            <li><code>PICSAT</code></li>
+                        </ul>
+                    </p>
+                </div>
+                <div class="">
+                    <h2><i class="bi bi-geo-alt"></i> Map</h2>
+                    <p>
+                        The map provides location of the satellite hovering above the earth surface.
+                        The map will either show a single object or multiple obejects based upon your search.
+                        The map will update the location of the satellite every 30 seconds.
+                        You can zoom in on any location on the map using mouse scroll or the <code>+</code> sign on the map.
+                        You can use two fingers to zoom in on the map on a touch screen device.
+                    </p>
+                    <p>
+                        All the satellites remain present on the map even if you make a new search.
+                        To make a fresh search, make sure to clear the map using <button type="button" class="btn btn-danger disabled btn-sm" name="button">Clear Map</button>
+                    </p>
+                    <p>You should see the satellites as follows after you hit the <button type="button" class="btn btn-primary disabled btn-sm" name="button">Submit</button> </p>
+
+                    <img src="images/map_tut.png" class="img-fluid" alt="space stuff">
+                </div>
+
+            </div>
+        </div>
+    </body>
+</html>
