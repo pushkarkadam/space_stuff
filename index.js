@@ -29,8 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(position => {
                     var latitude = position["geodetic"]["latitude"];
                     var longitude = position["geodetic"]["longitude"];
+                    var altitude = position["geodetic"]["altitude"].toFixed(2);
                     var label = position["tle"]["name"];
-                    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`)
+                    console.log(`Latitude: ${latitude}, Longitude: ${longitude}, Altitude: ${altitude}`);
 
                     // Adding marker
                     L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
