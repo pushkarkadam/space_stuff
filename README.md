@@ -13,7 +13,7 @@ This project is a web application where the user can track all the space objects
 
 * Clear the map by pressing `Clear Map` button on the home page.
 
-![space stuff](images/map_tut.png)
+![space stuff](images/map_color_marker.png)
 
 ## Acknowledgements
 
