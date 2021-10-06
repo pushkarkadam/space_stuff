@@ -30,8 +30,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     var latitude = position["geodetic"]["latitude"];
                     var longitude = position["geodetic"]["longitude"];
                     var altitude = position["geodetic"]["altitude"].toFixed(2);
-                    var label = position["tle"]["name"];
-                    console.log(`Latitude: ${latitude}, Longitude: ${longitude}, Altitude: ${altitude}`);
+                    var velocity = position["vector"]["velocity"]["r"].toFixed(2);
+                    var label = "<strong>ID</strong>: " + String(position["parameters"]["satelliteId"]) + "<br>"
+                                + "<strong>Name</strong>:" + String(position["tle"]["name"]) + "<br>"
+                                + "<strong>Altitude</strong>:" + String(altitude) + " km" + "<br>"
+                                + "<strong>Velocity</strong>:" + String(velocity) + " km/s";
+
+                    console.log(`Latitude: ${latitude}, Longitude: ${longitude}, Altitude: ${altitude}, Velocity: ${velocity}`);
 
                     // Adding marker
                     L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
@@ -48,8 +53,14 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(position => {
                         var latitude = position["geodetic"]["latitude"];
                         var longitude = position["geodetic"]["longitude"];
-                        var label = position["tle"]["name"];
-                        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`)
+                        var altitude = position["geodetic"]["altitude"].toFixed(2);
+                        var velocity = position["vector"]["velocity"]["r"].toFixed(2);
+                        var label = "<strong>ID</strong>: " + String(position["parameters"]["satelliteId"]) + "<br>"
+                                    + "<strong>Name</strong>:" + String(position["tle"]["name"]) + "<br>"
+                                    + "<strong>Altitude</strong>:" + String(altitude) + " km" + "<br>"
+                                    + "<strong>Velocity</strong>:" + String(velocity) + " km/s";
+
+                        console.log(`Latitude: ${latitude}, Longitude: ${longitude}, Altitude: ${altitude}, Velocity: ${velocity}`);
 
                         // Adding marker
                         L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
