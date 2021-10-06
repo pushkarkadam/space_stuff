@@ -10,11 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    var spaceObject = L.icon({
-        iconUrl: 'images/hexagon-fill.svg',
-        iconSize: [14, 14]
-    });
-
     // Submitting the form to get all the space objects on the map
     document.querySelector('form').onsubmit = function() {
         const name = document.querySelector('#satellite').value;
@@ -29,8 +24,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 .then(position => {
                     var latitude = position["geodetic"]["latitude"];
                     var longitude = position["geodetic"]["longitude"];
-                    var label = position["tle"]["name"];
-                    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`)
+                    var altitude = position["geodetic"]["altitude"].toFixed(2);
+                    var velocity = position["vector"]["velocity"]["r"].toFixed(2);
+                    var label = "<strong>ID</strong>: " + String(position["parameters"]["satelliteId"]) + "<br>"
+                                + "<strong>Name</strong>:" + String(position["tle"]["name"]) + "<br>"
+                                + "<strong>Altitude</strong>:" + String(altitude) + " km" + "<br>"
+                                + "<strong>Velocity</strong>:" + String(velocity) + " km/s";
+
+                    console.log(`Latitude: ${latitude}, Longitude: ${longitude}, Altitude: ${altitude}, Velocity: ${velocity}`);
+
+                    var spaceObject = getIconColor(altitude);
 
                     // Adding marker
                     L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
@@ -47,8 +50,16 @@ document.addEventListener('DOMContentLoaded', function() {
                     .then(position => {
                         var latitude = position["geodetic"]["latitude"];
                         var longitude = position["geodetic"]["longitude"];
-                        var label = position["tle"]["name"];
-                        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`)
+                        var altitude = position["geodetic"]["altitude"].toFixed(2);
+                        var velocity = position["vector"]["velocity"]["r"].toFixed(2);
+                        var label = "<strong>ID</strong>: " + String(position["parameters"]["satelliteId"]) + "<br>"
+                                    + "<strong>Name</strong>:" + String(position["tle"]["name"]) + "<br>"
+                                    + "<strong>Altitude</strong>:" + String(altitude) + " km" + "<br>"
+                                    + "<strong>Velocity</strong>:" + String(velocity) + " km/s";
+
+                        console.log(`Latitude: ${latitude}, Longitude: ${longitude}, Altitude: ${altitude}, Velocity: ${velocity}`);
+
+                        var spaceObject = getIconColor(altitude);
 
                         // Adding marker
                         L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
@@ -80,4 +91,26 @@ async function fetchSatellite(name) {
     const response = await fetch(`https://tle.ivanstanojevic.me/api/tle/?search=${name}`);
     const satellites = await response.json();
     return satellites;
+}
+
+function getIconColor(altitude) {
+    // Low earth orbit
+    if (altitude < 2000) {
+        icon = 'images/hexagon-fill-red.svg';
+    }
+    // Medium earth orbit
+    else if (altitude < 35780) {
+        icon = 'images/hexagon-fill-blue.svg';
+    }
+    // Geosynchronous orbit and high earth orbit
+    else {
+        icon = 'images/hexagon-fill-black.svg'
+    }
+
+    var spaceObject = L.icon({
+        iconUrl: icon,
+        iconSize: [14, 14]
+    });
+
+    return spaceObject;
 }
