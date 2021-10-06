@@ -104,7 +104,7 @@ function getIconColor(altitude) {
         icon = 'images/hexagon-fill-red.svg';
     }
     // Medium earth orbit
-    else if (altitude < 35786) {
+    else if (altitude < 35780) {
         icon = 'images/hexagon-fill-blue.svg';
     }
     // Geosynchronous orbit and high earth orbit
