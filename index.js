@@ -10,11 +10,6 @@ document.addEventListener('DOMContentLoaded', function() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    // var spaceObject = L.icon({
-    //     iconUrl: 'images/hexagon-fill-red.svg',
-    //     iconSize: [14, 14]
-    // });
-
     // Submitting the form to get all the space objects on the map
     document.querySelector('form').onsubmit = function() {
         const name = document.querySelector('#satellite').value;
