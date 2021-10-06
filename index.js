@@ -10,10 +10,10 @@ document.addEventListener('DOMContentLoaded', function() {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
-    var spaceObject = L.icon({
-        iconUrl: 'images/hexagon-fill.svg',
-        iconSize: [14, 14]
-    });
+    // var spaceObject = L.icon({
+    //     iconUrl: 'images/hexagon-fill-red.svg',
+    //     iconSize: [14, 14]
+    // });
 
     // Submitting the form to get all the space objects on the map
     document.querySelector('form').onsubmit = function() {
@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
 
                     console.log(`Latitude: ${latitude}, Longitude: ${longitude}, Altitude: ${altitude}, Velocity: ${velocity}`);
 
+                    var spaceObject = getIconColor(altitude);
+
                     // Adding marker
                     L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
                 })
@@ -61,6 +63,8 @@ document.addEventListener('DOMContentLoaded', function() {
                                     + "<strong>Velocity</strong>:" + String(velocity) + " km/s";
 
                         console.log(`Latitude: ${latitude}, Longitude: ${longitude}, Altitude: ${altitude}, Velocity: ${velocity}`);
+
+                        var spaceObject = getIconColor(altitude);
 
                         // Adding marker
                         L.marker([latitude, longitude], {icon: spaceObject}).bindPopup(label).addTo(map);
@@ -92,4 +96,22 @@ async function fetchSatellite(name) {
     const response = await fetch(`https://tle.ivanstanojevic.me/api/tle/?search=${name}`);
     const satellites = await response.json();
     return satellites;
+}
+
+function getIconColor(altitude) {
+    // Low earth orbit
+    if (altitude < 2000) {
+        icon = 'images/hexagon-fill-red.svg';
+    } else if (altitude < 35786) {
+        icon = 'images/hexagon-fill-yellow.svg';
+    } else {
+        icon = 'images/hexagon-fill-green.svg'
+    }
+
+    var spaceObject = L.icon({
+        iconUrl: icon,
+        iconSize: [14, 14]
+    });
+
+    return spaceObject;
 }
