@@ -102,9 +102,13 @@ function getIconColor(altitude) {
     // Low earth orbit
     if (altitude < 2000) {
         icon = 'images/hexagon-fill-red.svg';
-    } else if (altitude < 35786) {
+    }
+    // Medium earth orbit
+    else if (altitude < 35786) {
         icon = 'images/hexagon-fill-blue.svg';
-    } else {
+    }
+    // Geosynchronous orbit and high earth orbit
+    else {
         icon = 'images/hexagon-fill-black.svg'
     }
 
