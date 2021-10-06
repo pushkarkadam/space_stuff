@@ -103,9 +103,9 @@ function getIconColor(altitude) {
     if (altitude < 2000) {
         icon = 'images/hexagon-fill-red.svg';
     } else if (altitude < 35786) {
-        icon = 'images/hexagon-fill-yellow.svg';
+        icon = 'images/hexagon-fill-blue.svg';
     } else {
-        icon = 'images/hexagon-fill-green.svg'
+        icon = 'images/hexagon-fill-black.svg'
     }
 
     var spaceObject = L.icon({
